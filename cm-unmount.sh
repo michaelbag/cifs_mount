@@ -53,4 +53,4 @@ if [ ! $DEST ]; then
 fi
 echo -e "Unmounting...\n"
 
-/usr/bin/sudo /bin/umount $DEST
+/bin/umount $DEST

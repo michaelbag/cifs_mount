@@ -98,4 +98,4 @@ fi
 echo "Try mount $SRC folder to $DEST...
 Username: $USER
 "
-sudo mount -t cifs $SRC $DEST -o user=$USER,password=$PASSWORD
+/bin/mount -t cifs $SRC $DEST -o user=$USER,password=$PASSWORD
