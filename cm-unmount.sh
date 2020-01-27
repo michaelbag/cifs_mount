@@ -11,6 +11,11 @@ The following options are applicable for use:
 "
 }
 
+if [ $# = 0 ]; then
+  SCRIPTPATH=$(cd ${0%/*} && pwd -P)
+  source $SCRIPTPATH/cm-mount.conf
+fi;
+
 while [ $# -gt 0 ]; do
 case $1 in
 -c)
@@ -40,11 +45,6 @@ case $1 in
 
 esac
 done
-
-if [ $# = 0 ]; then
-  SCRIPTPATH=$(cd ${0%/*} && pwd -P)
-  source $SCRIPTPATH/cm-mount.conf
-fi;
 
 if [ ! $DEST ]; then
   echo "Mount destination directory not specified" 1>&2
