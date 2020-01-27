@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage_show () {
-  echo " ---
+  echo "
 The following options are applicable for use:
 
 -c <mount config file>
