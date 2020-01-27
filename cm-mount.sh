@@ -15,8 +15,18 @@ The following options are applicable for use:
 "
 }
 
+if [ $# = 0 ]; then
+  SCRIPTPATH=$(cd ${0%/*} && pwd -P)
+  echo "Load standart configuration files:
+  * $SCRIPTPATH\cm-mount.conf
+  * $SCRIPTPATH\cm-user.conf"
+  source $SCRIPTPATH/cm-mount.conf
+  source $SCRIPTPATH/cm-user.conf
+fi
+
 while [ $# -gt 0 ]; do
 case $1 in
+
 -c)
   if [ -r "$2" ]; then
 	source "$2"
@@ -57,17 +67,12 @@ case $1 in
 
 *)
   echo "Unknown Option \"$1\"" 1>&2
+  usage_show
   exit 1
 ;;
 
 esac
 done
-
-if [ $# = 0 ]; then
-  SCRIPTPATH=$(cd ${0%/*} && pwd -P)
-  source $SCRIPTPATH/cm-mount.conf
-  source $SCRIPTPATH/cm-user.conf
-fi;
 
 if [ ! $SRC ]; then
   echo "No source network folder specified" 1>&2
@@ -90,6 +95,7 @@ if [ ! $PASSWORD ]; then
   exit 1
 fi
 
-echo "Try mount $SRC folder to $DEST. (user: $USER)...
+echo "Try mount $SRC folder to $DEST...
+Username: $USER
 "
-sudo mount -t cifs $SRC $DST -o user=$USER,password=$PASSWORD
+sudo mount -t cifs $SRC $DEST -o user=$USER,password=$PASSWORD
